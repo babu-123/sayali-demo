@@ -1,0 +1,57 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Properties;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+
+public class test1{
+
+	static WebDriver driver;
+	static Properties p;
+	static Properties p1;
+	static String filePath = System.getProperty("user.dir");
+	static FileInputStream finput;
+	static FileInputStream fis;
+	
+	
+	public static void init() throws Exception {
+		finput = new FileInputStream(filePath + "/data.properties");
+		p = new Properties();
+		p.load(finput);
+			
+		fis = new FileInputStream(filePath + "/locators.properties");
+		p1 = new Properties();
+		p1.load(fis);
+		
+	}
+	
+	
+	public static void getBrowser(String browser) {
+		if(p.getProperty(browser).equals("chrome")){
+		 System.setProperty("webdriver.chrome.driver", "C:\\Users\\SAYALI\\Downloads\\chromedriver.exe");
+		 ChromeOptions option = new ChromeOptions();
+		 option.addArguments("user-data-dir=C:\\Users\\SAYALI\\AppData\\Local\\Google\\Chrome\\User Data\\Profile 1");
+		 		 
+		 driver = new ChromeDriver(option);
+		 
+		 
+		}
+	}
+	
+	
+	public static void openURL(String url) {
+		
+		driver.get(p.getProperty(url));
+		//Thread.sleep(3000);
+	}
+
+	
+	public static void sendText(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
